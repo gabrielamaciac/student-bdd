@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
+@SuppressWarnings("unused")
 public class BeanConfiguration {
     @Bean
     public RestTemplate restTemplate() {

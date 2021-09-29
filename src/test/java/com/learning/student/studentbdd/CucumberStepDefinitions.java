@@ -1,12 +1,11 @@
 package com.learning.student.studentbdd;
 
 import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
+@Slf4j
 public class CucumberStepDefinitions {
 }

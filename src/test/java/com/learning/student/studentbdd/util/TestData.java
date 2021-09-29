@@ -6,6 +6,7 @@ import com.learning.student.studentbdd.payload.Mark;
 import com.learning.student.studentbdd.payload.Student;
 
 import java.util.Collections;
+import java.util.UUID;
 
 public class TestData {
 
@@ -18,7 +19,7 @@ public class TestData {
     public static final String TEST_STREET = "Street";
     public static final String TEST_SUBJECT = "Subject";
     public static final String DATE_RECEIVED = "2020-03-12";
-    public static final String TEST_CNP = "some-cnp";
+    public static final String TEST_CNP = UUID.randomUUID().toString().replace("-", "");
 
     private TestData() {
     }
@@ -42,8 +43,10 @@ public class TestData {
                 "        <city>Number</city>\n" +
                 "        <country>Street</country>\n" +
                 "    </address>\n" +
+                "    \n" +
                 "    <grades>\n" +
                 "        <subject>Subject</subject>\n" +
+                "        \n" +
                 "        <marks>\n" +
                 "            <dateReceived>2020-03-12</dateReceived>\n" +
                 "            <mark>10.0</mark>\n" +
