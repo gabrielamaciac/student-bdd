@@ -5,6 +5,7 @@ import com.learning.student.studentbdd.payload.Grade;
 import com.learning.student.studentbdd.payload.Mark;
 import com.learning.student.studentbdd.payload.Student;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -29,6 +30,14 @@ public class TestData {
         Mark mark = new Mark(DATE_RECEIVED, 10.0);
         Grade grade = new Grade(TEST_SUBJECT, Collections.singletonList(mark));
         return new Student(TEST_FIRST_NAME, TEST_LAST_NAME, TEST_CNP, DATE_OF_BIRTH, address, Collections.singletonList(grade));
+    }
+
+    public static Student getInvalidStudent(String uniqueCnp) {
+        Address address = new Address(TEST_CITY, TEST_COUNTRY, TEST_NUMBER, TEST_STREET);
+        Mark firstMark = new Mark(DATE_RECEIVED, 4.0);
+        Mark secondMark = new Mark(DATE_RECEIVED, 3.0);
+        Grade grade = new Grade(TEST_SUBJECT, Arrays.asList(firstMark, secondMark));
+        return new Student(TEST_FIRST_NAME, TEST_LAST_NAME, uniqueCnp, DATE_OF_BIRTH, address, Collections.singletonList(grade));
     }
 
     public static String getStudentXml(String cnp) {

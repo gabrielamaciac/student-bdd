@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 
 import static com.learning.student.studentbdd.util.Constants.EXPORT_SERVICE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
 public class ExportSteps extends AbstractSteps {
@@ -25,7 +24,6 @@ public class ExportSteps extends AbstractSteps {
 
     @Given("the imported student")
     public void theImportedStudent() {
-        assertNotNull(testContext().getStudentSearch());
         studentSearch = testContext().getStudentSearch();
         log.info("given the imported student");
     }

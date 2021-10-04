@@ -26,36 +26,37 @@ public class SearchSteps extends AbstractSteps {
     @Autowired
     private RestTemplate restTemplate;
     private Student student;
-    private StudentSearch studentFound;
     private List<StudentSearch> studentSearchList;
 
 
     @Given("an already imported student")
     public void prepareTheValidStudentJson() {
-        student = (Student) testContext().getStudent();
+        student = testContext().getStudent();
         assertNotNull(student);
         log.info("given an already imported student");
     }
 
-    @When("user calls search by name and cnp endpoint")
+    @When("user calls search by name and cnp")
     public void userSearchesByNameAndCnp() {
+        // polling rate
         await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
             ResponseEntity<StudentSearch> response = restTemplate.getForEntity(SEARCH_SERVICE_URL +
                     "/student?firstName=BDD&lastName=Test&cnp=" + student.getCnp(), StudentSearch.class);
-            studentFound = response.getBody();
+            assertNotNull(response.getBody());
+            testContext().setStudentSearch(response.getBody());
         });
         log.info("when user calls search by name and cnp endpoint");
     }
 
     @Then("the student is found")
     public void studentIsFound() {
-        assertNotNull(studentFound);
-        assertEquals(student.getCnp(), studentFound.getCnp());
+        assertNotNull(testContext().getStudentSearch());
+        assertEquals(student.getCnp(), testContext().getStudentSearch().getCnp());
         log.info("then the student is found");
     }
 
 
-    @When("user calls search by search term endpoint")
+    @When("user calls search by search term")
     public void userSearchesBySearchTerm() {
         ResponseEntity<List<StudentSearch>> response = getSearchResponse("?searchTerm=BDD");
         studentSearchList = response.getBody();
@@ -63,7 +64,7 @@ public class SearchSteps extends AbstractSteps {
     }
 
 
-    @When("user calls search by isValid endpoint")
+    @When("user calls search by isValid")
     public void userSearchesByIsValid() {
         ResponseEntity<List<StudentSearch>> response = getSearchResponse("/student/isValid/true");
         studentSearchList = response.getBody();
